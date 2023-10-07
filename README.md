@@ -1,4 +1,4 @@
-# List interpreter in Rust
+# Lisp interpreter in Rust
 
 ![Rust Version][rustc-image]
 [![crates.io][crate-image]][crate-link]

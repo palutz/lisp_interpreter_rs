@@ -1,4 +1,4 @@
-appname = <>
+appname = lispRS
 
 rust-version:
 	@echo "Rust command-line utility versions:"

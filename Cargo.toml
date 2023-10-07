@@ -2,7 +2,46 @@
 name = "lisp_interpreter_rs"
 version = "0.1.0"
 edition = "2021"
+authors = [
+	"palutz, email@makeyourownbusiness.com",
+]
+include = [
+	"src/**/*",
+	"Cargo.toml",
+	"README.md"
+]
+description = ""
+repository = "https://github.com/palutz/lisp_interpreter_rs"
+documentation = "https://docs.rs/lisp_interpreter_rs/"
+keywords = []
+categories = ["command-line-utilities"]
+license = "MIT OR Apache-2.0"
+readme = "README.md"
 
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+[badges]
+is-it-maintained-issue-resolution = { repository = "palutz/lisp_interpreter_rs" }
+is-it-maintained-open-issues = { repository = "palutz/lisp_interpreter_rs" }
+
+maintenance = {status = "actively-developed"}
 
 [dependencies]
+
+
+[build-dependencies]
+
+[features]
+default     = ["std"]
+std         = [] # support for no_std in a backwards-compatible way
+debug       = [] # Enables debug messages
+doc         = [] # All the features which add to documentation
+
+[profile.test]
+opt-level = 1
+
+[profile.bench]
+lto = true
+codegen-units = 1
+
+[package.metadata.docs.rs]
+features = ["doc"]
+targets = ["x86_64-unknown-linux-gnu"]

@@ -5,27 +5,44 @@
 [![Documentation][docs-image]][docs-link]
 [![Dependency Status][deps-image]][deps-link]
 
-### Code Challenges #30 
+## Code Challenges #30 
 
+### Step 1
 
-## Diagrams
+In this step your goal is to tokenise the expressions in a string. My personal approach to this would be to use test-driven development (TDD) to build tests for some example Lisp, i.e.:
 
-(using mermaid)
+*1* this will give you the atom with a value of 1.
 
-```mermaid
-flowchart LR
-    id["This ❤ Unicode"]
-    markdown["`This **is** _Markdown_`"]
-    newLines["`Line1
-    Line 2
-    Line 3`"]
-    id --> markdown
-    markdown --> newLines
+*"Hello, Coding Challenges”* This is a string atom.
+
+*:CC* this should be an atom (which will evaluate to the symbol :CC).
+
+*(format t "Hello, Coding Challenge World World")* this is an s-expression which should tokenise as a list comprising of a symbol followed by a list.
+
+*(defun hello () "Hello, Coding Challenge World").*
+
+Be sure to add your own test cases too.
+
+### Step 2
+In this step your goal is to turn our tokenised string into an abstract syntax tree. By it’s nature, Lisp’s s-expressions can easily be turned into a binary tree. You could then represent that as an actual tree, or as a list, where some entries in the list are themselves lists.
+
+For example consider the Lisp code: 
+*(defun doublen (n) (* n 2))* you could represent that as a tree or as the list: *['defun', 'doublen', ['n'], ['*', 'n', 2]].*
+
+Again, I’d suggest building some test cases. Here are some classic examples to use:
+
 ```
+(defun fib (n)
+  (if (< n 2)
+      n
+      (+ (fib (- n 1))
+         (fib (- n 2)))))
 
-## References
-
-* [rust-cli-template](https://github.com/kbknapp/rust-cli-template)
+(defun fact (n) 
+  (if (<= n 1) 
+    1 
+    (* n (fact (- n 1)))))
+```
 
 
 [//]: # (badges)

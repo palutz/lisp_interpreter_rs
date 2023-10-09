@@ -9,7 +9,13 @@ enum Token<'a> {
 }
 
 fn eval_sexpr(s: &str) ->  SExpres {
-    todo!()
+    let inner = s.trim_start_matches("(").trim_end_matches(")");
+    let words : Vec<&str> = inner.split_whitespace().collect();
+    if words.len() == 0 {
+        ("", Vec::new())
+    } else  {
+        (words[0], words) 
+    }
 }
 
 fn tokenizer(s: &str) -> Token {
@@ -39,9 +45,12 @@ mod tests {
 
     #[test]
     fn test_sexpr() {
-        todo!()
-        // assert_eq!(tokenizer("(1)"), Token::SExpr { e: ("1", Vec::new()) });
-        // assert_eq!(tokenizer("(1 2)"), Token::SExpr { e: ("1", vec!["2"]) });
-        // assert_eq!(tokenizer("(1 2 3)"), Token::SExpr { e: ("1", vec!["2", "3"]) });
+        assert_eq!(tokenizer("()"), Token::SExpr { e: ("", vec!()) });
+        assert_eq!(tokenizer("(1)"), Token::SExpr { e: ("1", vec!["1"]) });
+        assert_eq!(tokenizer("(1 2)"), Token::SExpr { e: ("1", vec!["1","2"]) });
+        assert_eq!(tokenizer("(format t \"Hello, Coding Challenge World World\")"), 
+                        Token::SExpr { e: ("format", vec!["format", "t", "\"Hello,","Coding","Challenge","World","World\""]) });
+        assert_eq!(tokenizer("(defun hello () \"Hello, Coding Challenge World\")"), 
+                        Token::SExpr { e: ("defun", vec!["defun", "hello", "()", "\"Hello,","Coding","Challenge","World\""]) });
     }
 }

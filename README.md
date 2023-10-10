@@ -43,7 +43,23 @@ Again, I’d suggest building some test cases. Here are some classic examples to
     1 
     (* n (fact (- n 1)))))
 ```
+### Step 3
+In this step your goal is to be able to evaluate an AST and execute it. To be able to do that you’ll need to have some way to look up the symbols that have been tokenised. For example when your evaluation function encounters the *+* operator it will need to know to evaluate and add together the two arguments.
 
+To be able to do this your code will need to be able to look up the symbol in a mapping from variable name to value. This should include support for standard functions, like addition, subtraction and so on as well as user-defined variables.
+
+You can create nested mappings to support local variables - look look up the variable in the innermost mapping then work outwards to access the global scope.
+
+For this challenge I’d suggest you support the *mathematical operators*, *if*, *defun*, *format* and the *comparison operators*.
+
+You goal for this step is to be able to run some simple code:
+
+```
+(+ 1 2)
+(* 2 3)
+(defun doublen (n) (* 2 n))
+(doublen 4)
+```
 
 [//]: # (badges)
 

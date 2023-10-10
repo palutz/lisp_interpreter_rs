@@ -8,7 +8,6 @@
 ## Code Challenges #30 
 
 ### Step 1
-
 In this step your goal is to tokenise the expressions in a string. My personal approach to this would be to use test-driven development (TDD) to build tests for some example Lisp, i.e.:
 
 *1* this will give you the atom with a value of 1.
@@ -43,6 +42,7 @@ Again, I’d suggest building some test cases. Here are some classic examples to
     1 
     (* n (fact (- n 1)))))
 ```
+
 ### Step 3
 In this step your goal is to be able to evaluate an AST and execute it. To be able to do that you’ll need to have some way to look up the symbols that have been tokenised. For example when your evaluation function encounters the *+* operator it will need to know to evaluate and add together the two arguments.
 
@@ -59,6 +59,21 @@ You goal for this step is to be able to run some simple code:
 (* 2 3)
 (defun doublen (n) (* 2 n))
 (doublen 4)
+```
+
+### Step 4
+In this step your goal is to implement a REPL (Read-Evaluate-Print Loop). Essentially a prompt that allows the user to enter and expression and immediately see it read, evaluated and the output printed. Like Python if your familiar with it.
+
+Once done you should be able to run the code above through it:
+```
+cclisp> (+ 1 2)
+3
+cclisp>  (* 2 3)
+6
+cclisp> (defun doublen (n) (* 2 n))
+DOUBLEN
+cclisp> (doublen 4)  
+8
 ```
 
 [//]: # (badges)

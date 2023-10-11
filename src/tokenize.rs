@@ -68,6 +68,8 @@ fn tokenizer2(s: &str) -> Vec<TokenT> {
     if buffer.0 != NotDef {
         tokens.push(buffer);
     }
+    // tokens, get index of first open par until index is null,
+    //then iterate over slices to return vec of them
     tokens
 }
 

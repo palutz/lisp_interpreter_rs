@@ -187,10 +187,46 @@ mod tests {
                 vec![
                     Atom("defun".to_string()), 
                     Atom("fib".to_string()), 
-                    List(vec![Atom("n".to_string())])
+                    List(vec![Atom("n".to_string())]), 
+                    List(vec![
+                        Atom("if".to_string()), List(vec![Atom("<".to_string()), Atom("n".to_string()), Atom("2".to_string())]), 
+                            Atom("n".to_string()), 
+                            List(vec![Atom("+".to_string()), List(vec![Atom("fib".to_string()), List(vec![Atom("-".to_string()), Atom("n".to_string()), Atom("1".to_string())])]), 
+                                List(vec![Atom("fib".to_string()), List(vec![Atom("-".to_string()), Atom("n".to_string()), Atom("2".to_string())])])]
+                        )]
+                    )
                 ])
             ]);
         println!("{:?}", res);
-        assert!(true);
+        assert_eq!(res, expected);
+    }
+
+    #[test]
+    fn test_factorial() {
+        use Expr::*;
+
+        let s = &mut tokenizer2(
+            "(defun fact (n) 
+                (if (<= n 1) 
+                    1 
+                    (* n (fact (- n 1)))))"
+        );
+        let mut res : Vec<Expr> = vec!();
+        token2treeexpr(s, &mut res);
+        let expected = Vec::from(
+            [List(
+                vec![
+                    Atom("defun".to_string()), 
+                    Atom("fact".to_string()), 
+                    List(vec![Atom("n".to_string())]), 
+                    List(vec![
+                        Atom("if".to_string()), List(vec![Atom("<=".to_string()), Atom("n".to_string()), Atom("1".to_string())]), 
+                            Atom("1".to_string()), 
+                            List(vec![Atom("*".to_string()), Atom("n".to_string()), List(vec![Atom("fact".to_string()), List(vec![Atom("-".to_string()), Atom("n".to_string()), Atom("1".to_string())])])]
+                        )]
+                    )
+                ])
+            ]);
+        assert_eq!(res, expected);
     }
 }
